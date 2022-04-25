@@ -43,7 +43,7 @@ jobs:
 
       - name: Setup composer
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
-        run: composer install --optimize-autoloader
+        run: composer install --optimize-autoloader --no-scripts
 
       - name: Deploy to IONOS
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}

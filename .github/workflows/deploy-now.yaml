@@ -16,6 +16,12 @@ jobs:
           project: ${{ secrets.IONOS_PROJECT_ID }}
           service-host: api-eu.ionos.space
 
+      - name: Setup PHP with composer v2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          tools: composer:v2
+
       - name: checkout
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
         uses: actions/checkout@v2
@@ -37,11 +43,7 @@ jobs:
 
       - name: Setup composer
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
-        uses: php-actions/composer@v6
-        with:
-          php_version: '8.1.0'
-          version: '2'
-          args: --optimize-autoloader
+        run: composer install --optimize-autoloader
 
       - name: Deploy to IONOS
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}

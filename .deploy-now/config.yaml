@@ -22,10 +22,4 @@ deploy:
     pre-deployment-remote-commands:
       - echo "here you could enter maintenance mode..."
     post-deployment-remote-commands:
-      - php bin/create-app-secret
-      - find $(pwd) -type f -not -path "$(pwd)/logs/*" -exec chmod 664 {} \;
-      - find $(pwd) -type d -not -name "logs" -exec chmod 775 {} \;
-      - chmod -R o+w var
-      - APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear
       - php bin/console assets:install
-      - APP_ENV=prod APP_DEBUG=0 php bin/console cache:warmup

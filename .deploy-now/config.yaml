@@ -3,25 +3,28 @@ version: 1.0
 deploy:
   bootstrap:
     excludes:
-      - tests
-      - node_modules
-      - DOCKER_ENV
-      - docker_tag
-      - output.log
+      - config/jwt
+      - files
     post-deployment-remote-commands:
       - php bin/console system:install --basic-setup
 
   recurring:
     excludes:
-      - tests
-      - node_modules
-      - DOCKER_ENV
-      - docker_tag
-      - output.log
-      - var
+      - config/jwt
+      - files
+      - public/bundles
+      - public/css
+      - public/fonts
+      - public/js
+      - public/media
+      - public/sitemap
+      - public/theme
+      - public/thumbnail
+      - var/cache
+      - var/log
+
     pre-deployment-remote-commands:
       - echo "here you could enter maintenance mode..."
     post-deployment-remote-commands:
-      - php bin/console system:generate-jwt-secret
       - php bin/console assets:install
       - php bin/console theme:compile

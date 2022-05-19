@@ -26,5 +26,6 @@ deploy:
     pre-deployment-remote-commands:
       - echo "here you could enter maintenance mode..."
     post-deployment-remote-commands:
+      - php bin/console system:generate-jwt-secret
       - php bin/console assets:install
       - php bin/console theme:compile

@@ -6,7 +6,7 @@ deploy:
       - config/jwt
       - files
     post-deployment-remote-commands:
-      - php bin/console system:install --basic-setup
+      - php bin/console system:install --basic-setup --force
 
   recurring:
     excludes:
